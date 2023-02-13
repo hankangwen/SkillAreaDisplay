@@ -5,7 +5,7 @@ public class MoveController : MonoBehaviour {
 
     Animator ani;
 
-    NavMeshAgent nav;
+    UnityEngine.AI.NavMeshAgent nav;
 
     float h, v;
 
@@ -14,7 +14,7 @@ public class MoveController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         ani = GetComponent<Animator>();
-        nav = GetComponent<NavMeshAgent>();
+        nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 	
 	// Update is called once per frame

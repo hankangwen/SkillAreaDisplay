@@ -183,7 +183,7 @@ public class SkillArea : MonoBehaviour {
     {
         if (elementParent == null)
         {
-            elementParent = player.transform.FindChild("SkillArea");
+            elementParent = player.transform.Find("SkillArea");
         }
         if (elementParent == null)
         {
