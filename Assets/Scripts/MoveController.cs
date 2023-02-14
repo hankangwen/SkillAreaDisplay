@@ -28,7 +28,7 @@ public class MoveController : MonoBehaviour {
         {
             ani.SetBool("Run", true);
             // 根据摄像机方向 进行移动
-            moveVec = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * moveVec;
+            moveVec = Quaternion.Euler(0, App.game.mainCamera.transform.eulerAngles.y, 0) * moveVec;
             nav.Move(moveVec * Time.deltaTime * 5);
             RotatePlayer();
         }

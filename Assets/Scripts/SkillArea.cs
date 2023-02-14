@@ -17,8 +17,8 @@ public class SkillArea : MonoBehaviour {
         OuterCircle,    // 外圆
         InnerCircle,    // 内圆
         Cube,           // 矩形 
-        Sector60,        // 扇形
-        Sector120,        // 扇形
+        Sector60,       // 扇形
+        Sector120,      // 扇形
     }
 
     SkillJoystick joystick;
@@ -315,7 +315,7 @@ public class SkillArea : MonoBehaviour {
 
         Vector3 targetDir = deltaVec * dist;
 
-        float y = Camera.main.transform.rotation.eulerAngles.y;
+        float y = App.game.mainCamera.transform.rotation.eulerAngles.y;
         targetDir = Quaternion.Euler(0, y, 0) * targetDir;
 
         return targetDir + player.transform.position;
@@ -331,7 +331,7 @@ public class SkillArea : MonoBehaviour {
         
         Vector3 targetDir = deltaVec;
 
-        float y = Camera.main.transform.rotation.eulerAngles.y;
+        float y = App.game.mainCamera.transform.rotation.eulerAngles.y;
         targetDir = Quaternion.Euler(0, y, 0) * targetDir;
 
         return targetDir + player.transform.position;
