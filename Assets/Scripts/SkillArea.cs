@@ -10,38 +10,38 @@ public enum SkillAreaType
     OuterCircle_InnerCircle = 3,
 }
 
-public class SkillArea : MonoBehaviour {
-
+public class SkillArea : MonoBehaviour
+{
     enum SKillAreaElement
     {
-        OuterCircle,    // 外圆
-        InnerCircle,    // 内圆
-        Cube,           // 矩形 
-        Sector60,       // 扇形
-        Sector120,      // 扇形
+        OuterCircle, // 外圆
+        InnerCircle, // 内圆
+        Cube, // 矩形 
+        Sector60, // 扇形
+        Sector120, // 扇形
     }
 
     SkillJoystick joystick;
 
-    public GameObject player;      
+    public GameObject player;
 
-    public SkillAreaType areaType;      // 设置指示器类型
+    public SkillAreaType areaType; // 设置指示器类型
 
     Vector3 deltaVec;
 
-    float outerRadius = 6;      // 外圆半径
-    float innerRadius = 2f;     // 内圆半径
-    float cubeWidth = 2f;       // 矩形宽度 （矩形长度使用的外圆半径）
-    int angle = 60;             // 扇形角度
+    float outerRadius = 6; // 外圆半径
+    float innerRadius = 2f; // 内圆半径
+    float cubeWidth = 2f; // 矩形宽度 （矩形长度使用的外圆半径）
+    int angle = 60; // 扇形角度
 
     bool isPressed = false;
 
 
-    string path = "Effect/Prefabs/Hero_skillarea/";  // 路径
-    string circle = "quan_hero";    // 圆形
-    string cube = "chang_hero";     // 矩形
-    string sector60 = "shan_hero_60";    // 扇形60度
-    string sector120 = "shan_hero_120";    // 扇形120度
+    string path = "Effect/Prefabs/Hero_skillarea/"; // 路径
+    string circle = "quan_hero"; // 圆形
+    string cube = "chang_hero"; // 矩形
+    string sector60 = "shan_hero_60"; // 扇形60度
+    string sector120 = "shan_hero_120"; // 扇形120度
 
     Dictionary<SKillAreaElement, string> allElementPath;
     Dictionary<SKillAreaElement, Transform> allElementTrans;
@@ -103,7 +103,7 @@ public class SkillArea : MonoBehaviour {
 
     void LateUpdate()
     {
-        if(isPressed)
+        if (isPressed)
             UpdateElement();
     }
 
@@ -134,6 +134,7 @@ public class SkillArea : MonoBehaviour {
                     default:
                         break;
                 }
+
                 break;
             case SkillAreaType.OuterCircle_InnerCircle:
                 CreateElement(SKillAreaElement.OuterCircle);
@@ -148,7 +149,7 @@ public class SkillArea : MonoBehaviour {
     /// 创建技能区域展示元素
     /// </summary>
     /// <param name="element"></param>
-	void CreateElement(SKillAreaElement element)
+    void CreateElement(SKillAreaElement element)
     {
         Transform elementTrans = GetElement(element);
         if (elementTrans == null) return;
@@ -156,11 +157,13 @@ public class SkillArea : MonoBehaviour {
         switch (element)
         {
             case SKillAreaElement.OuterCircle:
-                elementTrans.localScale = new Vector3(outerRadius * 2, 1, outerRadius * 2) / player.transform.localScale.x;
+                elementTrans.localScale =
+                    new Vector3(outerRadius * 2, 1, outerRadius * 2) / player.transform.localScale.x;
                 elementTrans.gameObject.SetActive(true);
                 break;
             case SKillAreaElement.InnerCircle:
-                elementTrans.localScale = new Vector3(innerRadius * 2, 1, innerRadius * 2) / player.transform.localScale.x;
+                elementTrans.localScale =
+                    new Vector3(innerRadius * 2, 1, innerRadius * 2) / player.transform.localScale.x;
                 break;
             case SKillAreaElement.Cube:
                 elementTrans.localScale = new Vector3(cubeWidth, 1, outerRadius) / player.transform.localScale.x;
@@ -175,6 +178,7 @@ public class SkillArea : MonoBehaviour {
     }
 
     Transform elementParent;
+
     /// <summary>
     /// 获取元素的父对象
     /// </summary>
@@ -185,6 +189,7 @@ public class SkillArea : MonoBehaviour {
         {
             elementParent = player.transform.Find("SkillArea");
         }
+
         if (elementParent == null)
         {
             elementParent = new GameObject("SkillArea").transform;
@@ -193,6 +198,7 @@ public class SkillArea : MonoBehaviour {
             elementParent.localPosition = Vector3.zero;
             elementParent.localScale = Vector3.one;
         }
+
         return elementParent;
     }
 
@@ -213,6 +219,7 @@ public class SkillArea : MonoBehaviour {
             elementGo.name = name;
             elementTrans = elementGo.transform;
         }
+
         elementTrans.localEulerAngles = Vector3.zero;
         elementTrans.localPosition = Vector3.zero;
         elementTrans.localScale = Vector3.one;
@@ -269,6 +276,7 @@ public class SkillArea : MonoBehaviour {
                     default:
                         break;
                 }
+
                 break;
             case SkillAreaType.OuterCircle_InnerCircle:
                 UpdateElementPosition(SKillAreaElement.InnerCircle);
@@ -301,6 +309,7 @@ public class SkillArea : MonoBehaviour {
             default:
                 break;
         }
+
         if (!allElementTrans[element].gameObject.activeSelf)
             allElementTrans[element].gameObject.SetActive(true);
     }
@@ -328,7 +337,7 @@ public class SkillArea : MonoBehaviour {
     Vector3 GetCubeSectorLookAt()
     {
         if (player == null) return Vector3.zero;
-        
+
         Vector3 targetDir = deltaVec;
 
         float y = App.game.mainCamera.transform.rotation.eulerAngles.y;
